@@ -5,11 +5,13 @@ import confetti from 'canvas-confetti';
 import { useLanguage } from '../context/LanguageContext';
 import { useSound } from '../context/SoundContext';
 import { useData } from '../context/DataContext';
+import { resolveAssetUrl } from '../utils/resolveAssetUrl';
 
 export const DownloadSection: React.FC = () => {
   const { t } = useLanguage();
   const { playRev, playClick } = useSound();
   const { settings, localPcInstallerUrl } = useData();
+  const logoUrl = resolveAssetUrl(settings.logoUrl) || settings.logoUrl;
   const [selectedMirror, setSelectedMirror] = useState<'playstore' | 'pc' | 'apk'>('playstore');
   const [showChangelog, setShowChangelog] = useState(false);
   const [downloadCount, setDownloadCount] = useState(settings.downloadCount || 1248930);
@@ -69,7 +71,7 @@ export const DownloadSection: React.FC = () => {
               viewport={{ once: true }}
               className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-primary/20 border border-primary/40 mb-4"
             >
-              <img src={settings.logoUrl} alt="UBT" className="w-5 h-5 object-contain" />
+              <img src={logoUrl} alt="UBT" className="w-5 h-5 object-contain" />
               <span className="text-xs font-tech tracking-widest text-primary uppercase font-extrabold">
                 {t.download.badge}
               </span>

@@ -4,6 +4,7 @@ import { Download, Volume2, VolumeX, Menu, X, Globe, Lock, ShieldCheck } from 'l
 import { useLanguage } from '../context/LanguageContext';
 import { useSound } from '../context/SoundContext';
 import { useData } from '../context/DataContext';
+import { resolveAssetUrl } from '../utils/resolveAssetUrl';
 import type { Language } from '../i18n/translations';
 
 interface NavbarProps {
@@ -51,6 +52,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenAdminLogin }) => {
       : settings.logoPosition === 'left'
       ? 'ml-auto'
       : 'mx-auto';
+  const logoUrl = resolveAssetUrl(settings.logoUrl) || settings.logoUrl;
 
   return (
     <motion.header
@@ -74,7 +76,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenAdminLogin }) => {
         >
           <div className={`relative ${logoSizeClass} rounded-none overflow-hidden bg-transparent border-none`}>
             <img
-              src={settings.logoUrl}
+              src={logoUrl}
               alt="UBT Official Logo"
               className="w-full h-full object-cover"
             />

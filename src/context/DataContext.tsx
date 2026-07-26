@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import type { SiteSettings, NewsItem, CarItem, FaqItem, DownloadMirror, FounderItem } from '../types/cms';
+import { resolveAssetUrl } from '../utils/resolveAssetUrl';
 
 interface DataContextType {
   settings: SiteSettings;
@@ -33,7 +34,7 @@ interface DataContextType {
 }
 
 const DEFAULT_SETTINGS: SiteSettings = {
-  logoUrl: '/ubt-logo.jpg',
+  logoUrl: 'ubt-logo.jpg',
   logoSize: 'md',
   logoPosition: 'center',
   gameTitle1: 'HYPER CAR',
@@ -61,7 +62,7 @@ const DEFAULT_FOUNDERS: FounderItem[] = [
     id: 'f-1',
     name: 'Sardorbek (UBTTeam)',
     role: 'Loyiha Asoschisi va Bosh Muhandis (Founder & Lead Engine Dev)',
-    photo: '/ubt-logo.jpg',
+    photo: 'ubt-logo.jpg',
     quote: "Bizning bosh maqsadimiz — O'zbekiston poyga ishqibozlari uchun dunyodagi eng mukammal avtosimulyatorni yaratish. Uddalab bo'lmas topshiriq yo'q!",
     bio: 'Hyper Car UBT-Team loyihasiga 2024-yilda asos solingan. 50+ dan ortiq muhandis va dasturchilar jamoasi bilan Unreal Engine 5.4 va Android platformasida fotorealistik poyga simulyatsiyasi ishlab chiqildi.',
   },
@@ -69,7 +70,7 @@ const DEFAULT_FOUNDERS: FounderItem[] = [
     id: 'f-2',
     name: 'UBT-Team Co-Founder',
     role: 'Hammuassis va Kreativ Direktor (Co-Founder & Creative Director)',
-    photo: '/ubt-logo.jpg',
+    photo: 'ubt-logo.jpg',
     quote: "Har bir burilish va dvigatel ovozi haqiqiy poygachi hissiyotini berishi shart.",
     bio: 'Toshkent va Tokio tungi avtomagistrallarining 3D vizual va 4K grafik arxitekturasiga rahbarlik qilgan.',
   }
@@ -186,10 +187,16 @@ const DEFAULT_MIRRORS: DownloadMirror[] = [
 
 const DataContext = createContext<DataContextType | undefined>(undefined);
 
+const normalizeSettings = (settings: SiteSettings): SiteSettings => ({
+  ...settings,
+  logoUrl: resolveAssetUrl(settings.logoUrl) || settings.logoUrl,
+});
+
 export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [settings, setSettings] = useState<SiteSettings>(() => {
     const saved = localStorage.getItem('ubt_site_settings_v2');
-    return saved ? { ...DEFAULT_SETTINGS, ...JSON.parse(saved) } : DEFAULT_SETTINGS;
+    const initial = saved ? { ...DEFAULT_SETTINGS, ...JSON.parse(saved) } : DEFAULT_SETTINGS;
+    return normalizeSettings(initial);
   });
 
   const [founders, setFounders] = useState<FounderItem[]>(() => {
@@ -284,7 +291,10 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
   };
 
   const updateSettings = (newSettings: Partial<SiteSettings>) => {
-    setSettings((prev) => ({ ...prev, ...newSettings }));
+    setSettings((prev) => {
+      const merged = { ...prev, ...newSettings };
+      return normalizeSettings(merged);
+    });
   };
 
   const addFounder = (founder: Omit<FounderItem, 'id'>) => {

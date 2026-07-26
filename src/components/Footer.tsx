@@ -3,11 +3,13 @@ import { Send, Video, MessageSquare, Mail, ChevronUp } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
 import { useSound } from '../context/SoundContext';
 import { useData } from '../context/DataContext';
+import { resolveAssetUrl } from '../utils/resolveAssetUrl';
 
 export const Footer: React.FC = () => {
   const { t } = useLanguage();
   const { playClick } = useSound();
   const { settings } = useData();
+  const logoUrl = resolveAssetUrl(settings.logoUrl) || settings.logoUrl;
 
   const scrollToTop = () => {
     playClick();
@@ -24,7 +26,7 @@ export const Footer: React.FC = () => {
             <div>
               <div className="flex items-center gap-3 mb-4">
                 <div className="w-10 h-10 rounded-xl p-0.5 bg-gradient-to-br from-primary via-secondary to-accent shadow-[0_0_20px_rgba(0,229,255,0.4)] overflow-hidden">
-                  <img src={settings.logoUrl} alt="UBT Logo" className="w-full h-full object-cover rounded-[10px]" />
+                  <img src={logoUrl} alt="UBT Logo" className="w-full h-full object-cover rounded-[10px]" />
                 </div>
                 <div className="flex flex-col">
                   <span className="font-display font-extrabold tracking-wider text-xl text-white">

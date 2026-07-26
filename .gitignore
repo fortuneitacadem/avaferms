@@ -55,3 +55,6 @@ Thumbs.db
 # IDE
 .vscode/
 .idea/
+
+# Deploy temp
+.gh-pages-temp/

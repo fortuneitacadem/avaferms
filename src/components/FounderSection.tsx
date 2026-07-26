@@ -2,9 +2,11 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { Quote, ShieldCheck, Award, Sparkles, Building2, Target } from 'lucide-react';
 import { useData } from '../context/DataContext';
+import { resolveAssetUrl } from '../utils/resolveAssetUrl';
 
 export const FounderSection: React.FC = () => {
   const { settings, founders, isEditModeActive, updateFounder } = useData();
+  const resolvedLogoUrl = resolveAssetUrl(settings.logoUrl) || settings.logoUrl;
 
   return (
     <section id="founder" className="relative py-24 bg-[#05070D] overflow-hidden">
@@ -76,13 +78,13 @@ export const FounderSection: React.FC = () => {
                 >
                   <div className="relative rounded-[22px] bg-[#05070D] overflow-hidden p-3">
                     <img
-                      src={founder.photo || settings.logoUrl}
+                      src={resolveAssetUrl(founder.photo || settings.logoUrl) || settings.logoUrl}
                       alt={founder.name}
                       className="w-full h-96 object-cover object-center rounded-2xl filter contrast-110 border border-white/10"
                     />
 
                     <div className="absolute bottom-6 right-6 flex items-center gap-2 px-3 py-1.5 rounded-xl bg-black/80 border border-primary/40 backdrop-blur-md">
-                      <img src={settings.logoUrl} alt="UBT" className="w-6 h-6 object-contain" />
+                      <img src={resolvedLogoUrl} alt="UBT" className="w-6 h-6 object-contain" />
                       <span className="text-[10px] font-tech text-white uppercase font-bold tracking-wider">
                         UBT OFFICIAL LOGO
                       </span>

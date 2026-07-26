@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { Zap, ShieldCheck } from 'lucide-react';
 import { useData } from '../context/DataContext';
+import { resolveAssetUrl } from '../utils/resolveAssetUrl';
 
 interface PreloaderProps {
   onComplete: () => void;
@@ -9,6 +10,7 @@ interface PreloaderProps {
 
 export const Preloader: React.FC<PreloaderProps> = ({ onComplete }) => {
   const { settings } = useData();
+  const logoUrl = resolveAssetUrl(settings.logoUrl) || settings.logoUrl;
   const [progress, setProgress] = useState(0);
   const [loadingStep, setLoadingStep] = useState("INITIALIZING ENGINE V12...");
 
@@ -59,7 +61,7 @@ export const Preloader: React.FC<PreloaderProps> = ({ onComplete }) => {
         >
           <div className="w-28 h-28 rounded-full border-2 border-primary/20 border-t-primary border-r-secondary animate-spin" />
           <div className="absolute w-20 h-20 rounded-2xl overflow-hidden p-1 bg-gradient-to-br from-primary via-secondary to-accent shadow-[0_0_25px_rgba(0,229,255,0.6)]">
-            <img src={settings.logoUrl} alt="UBT Official Logo" className="w-full h-full object-cover rounded-xl" />
+            <img src={logoUrl} alt="UBT Official Logo" className="w-full h-full object-cover rounded-xl" />
           </div>
         </motion.div>
 

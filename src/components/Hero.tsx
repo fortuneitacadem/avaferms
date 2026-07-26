@@ -4,6 +4,7 @@ import { Download, Play, Gauge, Zap, Flame, Cpu, Smartphone } from 'lucide-react
 import { useLanguage } from '../context/LanguageContext';
 import { useSound } from '../context/SoundContext';
 import { useData } from '../context/DataContext';
+import { resolveAssetUrl } from '../utils/resolveAssetUrl';
 
 interface HeroProps {
   onOpenTrailer: () => void;
@@ -13,6 +14,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenTrailer }) => {
   const { t } = useLanguage();
   const { playRev, playClick } = useSound();
   const { settings, isEditModeActive, updateSettings } = useData();
+  const logoUrl = resolveAssetUrl(settings.logoUrl) || settings.logoUrl;
 
   return (
     <section id="hero" className="relative min-h-screen flex items-center justify-center pt-24 pb-16 overflow-hidden">
@@ -40,7 +42,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenTrailer }) => {
           } items-center gap-2.5 px-4 py-1.5 rounded-full bg-card/80 border border-primary/40 backdrop-blur-md mb-6 shadow-[0_0_20px_rgba(0,229,255,0.2)]`}
         >
           <img
-            src={settings.logoUrl}
+            src={logoUrl}
             alt="UBT"
             className={`object-contain ${
               settings.logoSize === 'sm'
