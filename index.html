@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!DOCTYPE html>
 <html lang="en-us">
   <head>
@@ -59,45 +60,63 @@
       var buildUrl = "Build";
       var loaderUrl = buildUrl + "/avaferm.loader.js";
       var config = {
-        dataUrl: buildUrl + "/avaferm.data",
-        frameworkUrl: buildUrl + "/avaferm.framework.js",
-        codeUrl: buildUrl + "/avaferm.wasm",
-        streamingAssetsUrl: "StreamingAssets",
-        companyName: "UBT-TEAM",
-        productName: "AVAFerm",
-        productVersion: "0.0.1",
-        showBanner: unityShowBanner,
-      };
+        <!doctype html>
+        <html lang="en" class="dark scroll-smooth">
+          <head>
+            <meta charset="UTF-8" />
+            <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+            <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+            <!-- SEO & Metadata -->
+            <title>Hyper Car UBT-Team | The Ultimate Realistic PC Racing Game</title>
+            <meta name="description" content="Experience hyper-realistic graphics, V12 engine physics, dynamic Tashkent & Tokyo night highways, and 32-player online multiplayer in Hyper Car UBT-Team for Windows PC. Download Free Now!" />
+            <meta name="keywords" content="Hyper Car UBT-Team, PC Racing Game, Realistic Car Simulator, Uzbekistan Racing Game, Ray Tracing Racing, Download Racing Game PC, Hypercar Game 2026" />
+            <meta name="author" content="UBT-Team Games" />
 
-      // By default Unity keeps WebGL canvas render target size matched with
-      // the DOM size of the canvas element (scaled by window.devicePixelRatio)
-      // Set this to false if you want to decouple this synchronization from
-      // happening inside the engine, and you would instead like to size up
-      // the canvas DOM size and WebGL render target sizes yourself.
-      // config.matchWebGLToCanvasSize = false;
+            <!-- Open Graph / Facebook / Discord -->
+            <meta property="og:type" content="website" />
+            <meta property="og:title" content="Hyper Car UBT-Team | Realistic PC Racing Game" />
+            <meta property="og:description" content="Next-Gen Next-Level Realistic PC Racing Experience. Ray Tracing, 350+ km/h Telemetry, Dynamic Weather. Download Free Today." />
+            <meta property="og:image" content="https://images.unsplash.com/photo-1617788138017-80ad40651399?auto=format&fit=crop&w=1200&q=80" />
 
-      if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) {
-        // Mobile device style: fill the whole browser client area with the game canvas:
-        var meta = document.createElement('meta');
-        meta.name = 'viewport';
-        meta.content = 'width=device-width, height=device-height, initial-scale=1.0, user-scalable=no, shrink-to-fit=yes';
-        document.getElementsByTagName('head')[0].appendChild(meta);
-      }
+            <!-- Twitter -->
+            <meta name="twitter:card" content="summary_large_image" />
+            <meta name="twitter:title" content="Hyper Car UBT-Team | PC Racing Game" />
+            <meta name="twitter:description" content="Download Hyper Car UBT-Team for Windows PC. The most realistic racing simulator." />
+            <meta name="twitter:image" content="https://images.unsplash.com/photo-1617788138017-80ad40651399?auto=format&fit=crop&w=1200&q=80" />
 
-      loadingBar.style.display = "block";
+            <!-- Google Fonts -->
+            <link rel="preconnect" href="https://fonts.googleapis.com">
+            <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+            <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Orbitron:wght@500;700;800;900&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
 
-      var script = document.createElement("script");
-      script.src = loaderUrl;
-      script.onload = () => {
-        createUnityInstance(canvas, config, (progress) => {
-          progressBarFull.style.width = 100 * progress + "%";
-        }).then((unityInstance) => {
-          loadingBar.style.display = "none";
-        }).catch((message) => {
-          alert(message);
-        });
-      };
-      document.body.appendChild(script);
-    </script>
-  </body>
-</html>
+            <!-- Schema.org JSON-LD -->
+            <script type="application/ld+json">
+              {
+                "@context": "https://schema.org",
+                "@type": "VideoGame",
+                "name": "Hyper Car UBT-Team",
+                "url": "https://hypercar-ubt.com",
+                "image": "https://images.unsplash.com/photo-1617788138017-80ad40651399?auto=format&fit=crop&w=1200&q=80",
+                "description": "Next-Gen Realistic PC Racing Game featuring photorealistic cars, high speed telemetry, and Tashkent Night Highway physics.",
+                "genre": ["Racing", "Simulation", "Sports", "Multiplayer"],
+                "gamePlatform": "Windows PC",
+                "operatingSystem": "Windows 10 64-Bit, Windows 11 64-Bit",
+                "applicationCategory": "Game",
+                "author": {
+                  "@type": "Organization",
+                  "name": "UBT-Team"
+                },
+                "offers": {
+                  "@type": "Offer",
+                  "price": "0.00",
+                  "priceCurrency": "USD",
+                  "availability": "https://schema.org/InStock"
+                }
+              }
+            </script>
+          </head>
+          <body class="bg-[#05070D] text-white selection:bg-[#00E5FF] selection:text-black overflow-x-hidden antialiased">
+            <div id="root"></div>
+            <script type="module" src="/src/main.tsx"></script>
+        >>>>>>> 4f50689 (Initial commit - project import)
